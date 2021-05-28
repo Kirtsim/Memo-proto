@@ -93,15 +93,20 @@ include_directories("${models_dir}")
 message("Proto src directory: ${models_dir}")
 
 # Building the lib
-add_library(MemoGrpcLib "")
-target_sources(MemoGrpcLib
+if (NOT ${memo_proto_lib})
+    set(memo_proto_lib MemoGrpcLib})
+endif()
+
+add_library(${memo_proto_lib} "")
+target_sources(${memo_proto_lib}
     PRIVATE
         ${proto_srcs}
+        ${grpc_srcs}
     PUBLIC
-        ${grpc_srcs})
+        ${grpc_hdrs})
 
-target_compile_options(MemoGrpcLib PRIVATE -std=c++17 -g -w)
-target_link_libraries(MemoGrpcLib
+target_compile_options(${memo_proto_lib} PRIVATE -std=c++17 -g -w)
+target_link_libraries(${memo_proto_lib}
     PUBLIC
         ${_REFLECTION}
         ${_GRPC_GRPCPP}
