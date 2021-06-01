@@ -3,7 +3,7 @@ syntax = "proto3";
 import "Tag.proto";
 import "OperationStatus.proto";
 
-package memo.model;
+package memo.proto;
 
 service TagSvc {
     rpc Search(TagSearchRq) returns (TagSearchRs) {}

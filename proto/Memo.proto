@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-package memo.model;
+package memo.proto;
 
 message Memo {
     string id = 1;

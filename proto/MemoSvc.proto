@@ -3,7 +3,7 @@ syntax = "proto3";
 import "Memo.proto";
 import "OperationStatus.proto";
 
-package memo.model;
+package memo.proto;
 
 service MemoSvc {
     rpc Search(MemoSearchRq) returns (MemoSearchRs) {}
