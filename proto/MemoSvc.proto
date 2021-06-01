@@ -23,12 +23,12 @@ message Id {
 
 message MemoCreateRs {
     Memo memo = 1;
-    OperationStatus operationStatus = 2;
+    OperationStatus operation_status = 2;
 }
 
 message MemoSearchRq {
     message TitleOptions {
-        string startsWith = 1;
+        string starts_with = 1;
         repeated string contains = 2;
     }
 
@@ -37,10 +37,10 @@ message MemoSearchRq {
         int64 end   = 2;
     }
 
-    TitleOptions titleOptions = 1;
+    TitleOptions title_options = 1;
     repeated string tags = 2;
-    DateRange dateRange = 3;
-    int32 resultsPerPage = 4;
+    DateRange date_range = 3;
+    int32 results_per_page = 4;
 }
 
 message MemoSearchRs {

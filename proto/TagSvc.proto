@@ -18,15 +18,15 @@ message TagName {
 
 message TagSearchRq {
     message NameOptions {
-        string startsWith = 1;
+        string starts_with = 1;
         string contains = 2;
     }
 
-    NameOptions nameOptions = 1;
-    repeated string memoryIds = 2;
+    NameOptions name_options = 1;
+    repeated string memory_ids = 2;
     repeated string colors = 3;
 
-    int32 resultsPerPage = 4;
+    int32 results_per_page = 4;
 }
 
 message TagSearchRs {
