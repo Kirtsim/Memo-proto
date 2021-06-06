@@ -23,7 +23,7 @@ message TagSearchRq {
     }
 
     NameOptions name_options = 1;
-    repeated string memory_ids = 2;
+    repeated uint64 memory_ids = 2;
     repeated string colors = 3;
 
     int32 results_per_page = 4;

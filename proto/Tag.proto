@@ -3,7 +3,8 @@ syntax = "proto3";
 package memo.proto;
 
 message Tag {
-    string name = 1;
-    string color = 2;
-    uint64 timestamp = 3;
+    uint64 id = 1;
+    string name = 2;
+    string color = 3;
+    uint64 timestamp = 4;
 }

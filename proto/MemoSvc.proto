@@ -38,7 +38,7 @@ message MemoSearchRq {
     }
 
     TitleOptions title_options = 1;
-    repeated string tags = 2;
+    repeated uint64 tag_ids = 2;
     DateRange date_range = 3;
     int32 results_per_page = 4;
 }

@@ -6,6 +6,6 @@ message Memo {
     uint64 id = 1;
     string title = 2;
     string description = 3;
-    repeated string tag_names = 4;
+    repeated uint64 tag_ids = 4;
     uint64 timestamp = 5;
 }
