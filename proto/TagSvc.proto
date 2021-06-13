@@ -6,30 +6,81 @@ import "OperationStatus.proto";
 package memo.proto;
 
 service TagSvc {
-    rpc Search(TagSearchRq) returns (TagSearchRs) {}
-    rpc Create(Tag) returns (OperationStatus) {}
-    rpc Update(Tag) returns (OperationStatus) {}
-    rpc Delete(TagName) returns (OperationStatus) {}
+    rpc ListTags(ListTagsRq) returns (ListTagsRs) {}
+    rpc AddTag(AddTagRq) returns (AddTagRs) {}
+    rpc UpdateTag(UpdateTagRq) returns (UpdateTagRs) {}
+    rpc RemoveTag(RemoveTagRq) returns (RemoveTagRs) {}
 }
 
-message TagName {
-    string value = 1;
+//////////////////////////////////////////
+// LIST tags
+//////////////////////////////////////////
+message ListTagsRq {
+    string uuid = 1;
+    TagFilter filter = 2;
+    int32 result_page_size = 3;
+    TagView view = 4;
+    string page_token = 5;
 }
 
-message TagSearchRq {
-    message NameOptions {
-        string starts_with = 1;
-        string contains = 2;
-    }
-
-    NameOptions name_options = 1;
-    repeated uint64 memory_ids = 2;
-    repeated string colors = 3;
-
-    int32 results_per_page = 4;
+message ListTagsRs {
+    string request_uuid = 1;
+    repeated Tag tags = 2;
+    int32 total_count = 3;
+    string prev_page_token = 4;
+    string next_page_token = 5;
 }
 
-message TagSearchRs {
-    repeated Tag tags = 1;
-    int32 page = 2;
+message TagFilter {
+    string name_starts_with = 1;
+    string contains = 2;
+    repeated Colour colours = 3;
+    repeated uint64 assigned_to_memos = 4;
+    DateRange creation_time = 5;
+}
+
+enum TagView {
+    MINIMAL = 0;
+    COMPLETE = 1;
+}
+
+//////////////////////////////////////////
+// ADD tags
+//////////////////////////////////////////
+message AddTagRq {
+    string uuid = 1;
+    Tag tag = 2;
+}
+
+message AddTagRs {
+    string request_uuid = 1;
+    Tag tag = 2;
+    OperationStatus operation_status = 3;
+}
+
+//////////////////////////////////////////
+// UPDATE tag
+//////////////////////////////////////////
+message UpdateTagRq {
+    string uuid = 1;
+    Tag tag = 2;
+}
+
+message UpdateTagRs {
+    string request_uuid = 1;
+    OperationStatus operation_status = 2;
+}
+
+//////////////////////////////////////////
+// REMOVE tags
+//////////////////////////////////////////
+message RemoveTagRq {
+    string uuid = 1;
+    repeated uint64 ids = 2;
+}
+
+message RemoveTagRs {
+    string request_uuid = 1;
+    repeated Tag removed_tags = 2;
+    OperationStatus operation_status = 3;
 }
