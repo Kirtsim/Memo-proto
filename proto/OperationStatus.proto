@@ -3,12 +3,12 @@ syntax = "proto3";
 package memo.proto;
 
 message OperationStatus {
-    enum Status {
+    enum Type {
         SUCCESS = 0;
         WARNING = 1;
         FAILURE = 2;
     }
-    Status status = 1;
+    Type type = 1;
     int32  code = 2;
     string comment = 3;
 }
