@@ -1,49 +1,96 @@
 syntax = "proto3";
 
 import "Memo.proto";
+import "Tag.proto";
 import "OperationStatus.proto";
 
 package memo.proto;
 
-service MemoSvc {
-    rpc Search(MemoSearchRq) returns (MemoSearchRs) {}
-    rpc SearchById(IdList) returns (MemoSearchRs) {}
-    rpc Create(Memo) returns (MemoCreateRs) {}
-    rpc Update(Memo) returns (OperationStatus) {}
-    rpc Delete(Id) returns (OperationStatus) {}
+service Memos {
+    rpc ListMemos(ListMemosRq) returns (ListMemosRs) {}
+    rpc AddMemo(AddMemoRq) returns (AddMemoRs) {}
+    rpc UpdateMemo(UpdateMemoRq) returns (UpdateMemoRs) {}
+    rpc RemoveMemo(RemoveMemoRq) returns (RemoveMemoRs) {}
 }
 
-message IdList {
-    repeated Id ids = 1;
+//////////////////////////////////////////
+// LIST memos
+//////////////////////////////////////////
+message ListMemosRq {
+    string uuid = 1;
+    MemoFilter filter = 2;
+    int32 result_page_size = 3;
+    MemoView view = 4;
+    string page_token = 5;
 }
 
-message Id {
-    uint64 value = 1;
+message ListMemosRs {
+    string request_uuid = 1;
+    repeated Memo memos = 2;
+    map<uint64, Tag> tags = 3;
+    int32 total_count = 4;
+    string prev_page_token = 5;
+    string next_page_token = 6;
 }
 
-message MemoCreateRs {
-    Memo memo = 1;
-    OperationStatus operation_status = 2;
+message MemoFilter {
+    string title_starts_with = 1;
+    repeated string title_contains = 2;
+    repeated string contains = 3;
+    repeated uint64 tagged_by = 4;
+    DateRange creation_time = 5;
 }
 
-message MemoSearchRq {
-    message TitleOptions {
-        string starts_with = 1;
-        repeated string contains = 2;
-    }
-
-    message DateRange {
-        int64 start = 1;
-        int64 end   = 2;
-    }
-
-    TitleOptions title_options = 1;
-    repeated uint64 tag_ids = 2;
-    DateRange date_range = 3;
-    int32 results_per_page = 4;
+enum MemoView {
+    MINIMAL = 0; // Memo will contain Id, Title and timestamp
+    COMPLETE = 1;    // Memo will contain all of its fields
 }
 
-message MemoSearchRs {
-    repeated Memo memos = 1;
-    int32 page = 2;
+message DateRange {
+    int64 start = 1;
+    int64 end   = 2;
 }
+
+//////////////////////////////////////////
+// ADD memo
+//////////////////////////////////////////
+message AddMemoRq {
+    string uuid = 1;
+    Memo memo = 2;
+}
+
+message AddMemoRs {
+    string request_uuid = 1;
+    Memo added_memo = 2;
+    OperationStatus operation_status = 3;
+}
+
+//////////////////////////////////////////
+// UPDATE memo
+//////////////////////////////////////////
+
+message UpdateMemoRq {
+    string request_uuid = 1;
+    Memo memo = 2;
+}
+
+message UpdateMemoRs {
+    string request_uuid = 1;
+    OperationStatus operation_status = 3;
+}
+
+//////////////////////////////////////////
+// REMOVE memo
+//////////////////////////////////////////
+
+message RemoveMemoRq {
+    string request_uuid = 1;
+    repeated uint64 ids = 2;
+}
+
+message RemoveMemoRs {
+    string request_uuid = 1;
+    repeated Memo removed_memos = 2;
+    OperationStatus operation_status = 3;
+}
+
