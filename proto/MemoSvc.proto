@@ -3,6 +3,8 @@ syntax = "proto3";
 import "Memo.proto";
 import "Tag.proto";
 import "OperationStatus.proto";
+import "DateRange.proto";
+import "ModelView.proto";
 
 package memo.proto;
 
@@ -20,7 +22,7 @@ message ListMemosRq {
     string uuid = 1;
     MemoFilter filter = 2;
     int32 result_page_size = 3;
-    MemoView view = 4;
+    ModelView view = 4;         // MINIMAL will return only Memo's id, title & timestamp
     string page_token = 5;
 }
 
@@ -39,16 +41,6 @@ message MemoFilter {
     repeated string contains = 3;
     repeated uint64 tagged_by = 4;
     DateRange creation_time = 5;
-}
-
-enum MemoView {
-    MINIMAL = 0; // Memo will contain Id, Title and timestamp
-    COMPLETE = 1;    // Memo will contain all of its fields
-}
-
-message DateRange {
-    int64 start = 1;
-    int64 end   = 2;
 }
 
 //////////////////////////////////////////

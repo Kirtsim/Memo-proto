@@ -2,6 +2,8 @@ syntax = "proto3";
 
 import "Tag.proto";
 import "OperationStatus.proto";
+import "DateRange.proto";
+import "ModelView.proto";
 
 package memo.proto;
 
@@ -19,7 +21,7 @@ message ListTagsRq {
     string uuid = 1;
     TagFilter filter = 2;
     int32 result_page_size = 3;
-    TagView view = 4;
+    ModelView view = 4;         // MINIMAL will return id & name of the tags
     string page_token = 5;
 }
 
@@ -37,11 +39,6 @@ message TagFilter {
     repeated Colour colours = 3;
     repeated uint64 assigned_to_memos = 4;
     DateRange creation_time = 5;
-}
-
-enum TagView {
-    MINIMAL = 0;
-    COMPLETE = 1;
 }
 
 //////////////////////////////////////////

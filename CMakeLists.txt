@@ -4,7 +4,9 @@ set(proto_svc_files TagSvc.proto
                     MemoSvc.proto)
 set(proto_files     Tag.proto
                     Memo.proto
-                    OperationStatus.proto)
+                    OperationStatus.proto
+                    DateRange.proto
+                    ModelView.proto)
 list(APPEND proto_files ${proto_svc_files})
 
 set(repo_dir ${CMAKE_CURRENT_LIST_DIR})

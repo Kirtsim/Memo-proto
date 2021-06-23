@@ -1,0 +1,8 @@
+syntax = "proto3";
+
+package memo.proto;
+
+enum ModelView {
+    MINIMAL = 0;
+    COMPLETE = 1;
+}
