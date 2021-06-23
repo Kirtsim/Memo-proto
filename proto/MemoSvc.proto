@@ -8,7 +8,7 @@ import "ModelView.proto";
 
 package memo.proto;
 
-service Memos {
+service MemoService {
     rpc ListMemos(ListMemosRq) returns (ListMemosRs) {}
     rpc AddMemo(AddMemoRq) returns (AddMemoRs) {}
     rpc UpdateMemo(UpdateMemoRq) returns (UpdateMemoRs) {}

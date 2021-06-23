@@ -7,7 +7,7 @@ import "ModelView.proto";
 
 package memo.proto;
 
-service TagSvc {
+service TagService {
     rpc ListTags(ListTagsRq) returns (ListTagsRs) {}
     rpc AddTag(AddTagRq) returns (AddTagRs) {}
     rpc UpdateTag(UpdateTagRq) returns (UpdateTagRs) {}
