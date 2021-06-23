@@ -81,3 +81,35 @@ message RemoveTagRs {
     repeated Tag removed_tags = 2;
     OperationStatus operation_status = 3;
 }
+
+//////////////////////////////////////////
+// Old services (kept temporarily)
+//////////////////////////////////////////
+service TagSvc {
+    rpc Search(TagSearchRq) returns (TagSearchRs) {}
+    rpc Create(Tag) returns (OperationStatus) {}
+    rpc Update(Tag) returns (OperationStatus) {}
+    rpc Delete(TagName) returns (OperationStatus) {}
+}
+
+message TagName {
+    string value = 1;
+}
+
+message TagSearchRq {
+    message NameOptions {
+        string starts_with = 1;
+        string contains = 2;
+    }
+
+    NameOptions name_options = 1;
+    repeated string memory_ids = 2;
+    repeated string colors = 3;
+
+    int32 results_per_page = 4;
+}
+
+message TagSearchRs {
+    repeated Tag tags = 1;
+    int32 page = 2;
+}
