@@ -4,9 +4,9 @@ package memo.proto;
 
 message OperationStatus {
     enum Type {
-        SUCCESS = 0;
+        FAILURE = 0;
         WARNING = 1;
-        FAILURE = 2;
+        SUCCESS = 2;
     }
     Type type = 1;
     int32  code = 2;
