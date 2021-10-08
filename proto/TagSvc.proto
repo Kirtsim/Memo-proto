@@ -36,7 +36,7 @@ message ListTagsRs {
 message TagFilter {
     string name_starts_with = 1;
     string contains = 2;
-    repeated Colour colours = 3;
+    repeated int32 colours = 3;
     repeated uint64 assigned_to_memos = 4;
     DateRange creation_time = 5;
 }
