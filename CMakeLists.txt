@@ -96,10 +96,10 @@ message("Proto src directory: ${models_dir}")
 
 # Building the lib
 if (NOT ${memo_proto_lib})
-    set(memo_proto_lib MemoGrpcLib})
+    set(memo_proto_lib MemoGrpcLib)
 endif()
 
-add_library(${memo_proto_lib} "")
+add_library(${memo_proto_lib})
 target_sources(${memo_proto_lib}
     PRIVATE
         ${proto_srcs}
