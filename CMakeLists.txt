@@ -95,7 +95,7 @@ include_directories("${models_dir}")
 message("Proto src directory: ${models_dir}")
 
 # Building the lib
-if (NOT ${memo_proto_lib})
+if (NOT DEFINED memo_proto_lib OR "memo_proto_lib" STREQUAL "")
     set(memo_proto_lib MemoGrpcLib)
 endif()
 
